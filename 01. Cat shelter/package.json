@@ -1,0 +1,14 @@
+{
+  "name": "cat-shelter",
+  "version": "1.0.0",
+  "description": "Basic pure node js program",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch ./src/index.js"
+    , "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
