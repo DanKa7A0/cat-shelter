@@ -23,7 +23,6 @@ function TemplateCat(cat){
         <li>
             <img src="${cat.imgUrl}" alt="${cat.name}">
             <h3>${cat.name}</h3>
-            <p><span>Price: </span>${cat.price}$</p>
             <p><span>Breed: </span>${cat.breed}</p>
             <p><span>Description: </span>${cat.description}</p>
             <ul class="buttons">
@@ -42,4 +41,7 @@ export async function Css(){
 // add cat
 export async function AddCatView(){
     return await ReadFile("views/addCat.html");
+}
+export async function AddCatSubmit(data){
+    await db.SaveCat(data);
 }

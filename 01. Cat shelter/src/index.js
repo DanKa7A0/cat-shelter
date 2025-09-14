@@ -1,5 +1,4 @@
 import http from 'http';
-import fs from "fs/promises";
 import * as views from "./views.js";
 
 const server = http.createServer(async (req, resp) => {
@@ -16,6 +15,28 @@ const server = http.createServer(async (req, resp) => {
         }
         resp.write(view);
         resp.end();
+    }
+
+    if (req.method === "POST"){
+        let data = "";
+
+        req.on("data", (chunk) => {
+            data += chunk.toString();
+        });
+
+        req.on("end", async () => {
+            const searchParams = new URLSearchParams(data);
+            const result = Object.fromEntries(searchParams.entries());
+
+            if (req.url === "/cats/add-cat"){
+                await views.AddCatSubmit(result);
+            }
+
+            resp.writeHead(302, {
+                'location': '/'
+            });
+            resp.end();
+        });
     }
 });
 
