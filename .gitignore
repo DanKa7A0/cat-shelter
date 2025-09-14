@@ -1,0 +1,10 @@
+#executable files
+*.exe
+*main
+
+#build files
+*build/
+
+#files
+*.zip
+*.docx
