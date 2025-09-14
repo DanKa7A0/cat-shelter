@@ -6,7 +6,7 @@ async function ReadFile(file){
 }
 
 // home
-export async function HomePage(){
+export async function HomeView(){
     let content = await ReadFile("views/index.html");
 
     const cats = db.GetCats();
@@ -37,4 +37,9 @@ function TemplateCat(cat){
 // css
 export async function Css(){
     return await ReadFile("styles/site.css");
+}
+
+// add cat
+export async function AddCatView(){
+    return await ReadFile("views/addCat.html");
 }

@@ -4,15 +4,17 @@ import * as views from "./views.js";
 
 const server = http.createServer(async (req, resp) => {
     if (req.method === "GET"){        
-        let page = "";
+        let view = "";
         if (req.url === "/"){
-            page = await views.HomePage();
+            view = await views.HomeView();
         }
         else if (req.url === "/styles/site.css"){
-            page = await views.Css()
+            view = await views.Css();
         }
-
-        resp.write(page);
+        else if (req.url === "/cats/add-cat"){
+            view = await views.AddCatView();
+        }
+        resp.write(view);
         resp.end();
     }
 });
