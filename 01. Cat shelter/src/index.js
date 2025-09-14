@@ -1,17 +1,18 @@
 import http from 'http';
-import fs from "fs/promises"
+import fs from "fs/promises";
+import * as views from "./views.js";
 
 const server = http.createServer(async (req, resp) => {
     if (req.method === "GET"){        
-        let content = "";
+        let page = "";
         if (req.url === "/"){
-            content = await fs.readFile("./src/views/index.html", { encoding: "utf-8" });
+            page = await views.HomePage();
         }
         else if (req.url === "/styles/site.css"){
-            content = await fs.readFile("./src/styles/site.css", { encoding: "utf-8" }); 
+            page = await views.Css()
         }
 
-        resp.write(content);
+        resp.write(page);
         resp.end();
     }
 });
