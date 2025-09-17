@@ -60,3 +60,11 @@ export async function EditCatView(cat_ID){
 export async function EditCatSubmit(id, data){
     await db.EditCat(id, data);
 }
+
+// add breed
+export async function AddBreedView(){
+    return await ReadFile("views/addBreed.html");
+}
+export async function AddBreedSubmit(data){
+     await db.SaveBreed(data);
+}

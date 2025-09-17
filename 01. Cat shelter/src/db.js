@@ -29,3 +29,9 @@ export async function EditCat(cat_ID, catData){
     db.cats = db.cats.map(cat => cat.id === cat_ID ? { id: cat_ID, ...catData } : cat);
     return await SaveDb();
 }
+
+export async function SaveBreed(breedData){
+    console.log(breedData);
+    db.breeds.push(breedData.breedName);
+    return await SaveDb();
+}

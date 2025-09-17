@@ -17,6 +17,9 @@ const server = http.createServer(async (req, resp) => {
             const id = Number(req.url.split("/").pop());
             view = await views.EditCatView(id);
         }
+        else if (req.url.includes("/cats/add-breed")){
+            view = await views.AddBreedView();
+        }
         resp.write(view);
         resp.end();
     }
@@ -38,6 +41,9 @@ const server = http.createServer(async (req, resp) => {
             else if (req.url.includes("/cats/edit-cat")){
                 const id = Number(req.url.split("/").pop());
                 await views.EditCatSubmit(id, result);
+            }
+            else if (req.url === "/cats/add-breed"){
+                await views.AddBreedSubmit(result);
             }
 
             resp.writeHead(302, {
