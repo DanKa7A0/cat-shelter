@@ -60,7 +60,7 @@ form {
 }
 
 input[type=text], input[type="file"], input[type="number"], textarea, select {
-    padding: 0.5rem 7.5rem 0.5rem 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     border-radius: 7px;
     border: none ;
     outline: none;
@@ -72,7 +72,7 @@ input[type="number"] {
 }
 
 textarea {
-    max-width: 19.5rem;
+    /* max-width: 19.5rem; */
     min-width: 19.5rem;
     max-height: 15rem;
     min-height: 3rem;

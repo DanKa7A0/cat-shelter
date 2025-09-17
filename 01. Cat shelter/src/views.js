@@ -26,7 +26,7 @@ function TemplateCat(cat){
             <p><span>Breed: </span>${cat.breed}</p>
             <p><span>Description: </span>${cat.description}</p>
             <ul class="buttons">
-                <li class="btn edit"><a href="">Change Info</a></li>
+                <li class="btn edit"><a href="/cats/edit-cat/${cat.id}">Change Info</a></li>
                 <li class="btn delete"><a href="">New Home</a></li>
             </ul>
         </li>
@@ -44,4 +44,19 @@ export async function AddCatView(){
 }
 export async function AddCatSubmit(data){
     await db.SaveCat(data);
+}
+
+// edit cat
+export async function EditCatView(cat_ID){
+    let html = await ReadFile("views/editCat.html");
+    const cat = await db.GetCat(cat_ID);
+
+    html = html.replace("{{catName}}", cat.name);
+    html = html.replace("{{catDescription}}", cat.description);
+    html = html.replace("{{catUrl}}", cat.imgUrl);
+
+    return html;
+}
+export async function EditCatSubmit(id, data){
+    await db.EditCat(id, data);
 }

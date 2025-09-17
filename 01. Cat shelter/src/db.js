@@ -12,11 +12,20 @@ export function GetCats(){
     return db.cats;
 }
 
+export function GetCat(cat_ID){
+    return db.cats.find((cat) => cat.id === cat_ID);
+}
+
 export async function SaveCat(catData){
     db.cats.push({
         id: db.cats[db.cats.length - 1].id + 1
         , ...catData
     });
 
+    return await SaveDb();
+}
+
+export async function EditCat(cat_ID, catData){
+    db.cats = db.cats.map(cat => cat.id === cat_ID ? { id: cat_ID, ...catData } : cat);
     return await SaveDb();
 }
