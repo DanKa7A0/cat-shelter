@@ -50,10 +50,17 @@ export async function AddCatSubmit(data){
 export async function EditCatView(cat_ID){
     let html = await ReadFile("views/editCat.html");
     const cat = await db.GetCat(cat_ID);
+    const breeds = await db.GetBreeds(cat_ID);    
+
+    let htmlBreeds = "";
+    breeds.forEach((breed) => {
+        htmlBreeds += `<option value="${breed}">${breed}</option>`;
+    });
 
     html = html.replace("{{catName}}", cat.name);
     html = html.replace("{{catDescription}}", cat.description);
     html = html.replace("{{catUrl}}", cat.imgUrl);
+    html = html.replace("{{breeds}}", htmlBreeds);
 
     return html;
 }

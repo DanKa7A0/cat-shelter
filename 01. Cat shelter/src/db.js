@@ -31,7 +31,10 @@ export async function EditCat(cat_ID, catData){
 }
 
 export async function SaveBreed(breedData){
-    console.log(breedData);
     db.breeds.push(breedData.breedName);
     return await SaveDb();
+}
+
+export async function GetBreeds(){
+    return await db.breeds;
 }
