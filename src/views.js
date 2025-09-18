@@ -6,10 +6,19 @@ async function ReadFile(file){
 }
 
 // home
-export async function HomeView(){
+export async function HomeView(url){
     let content = await ReadFile("views/index.html");
+    let cats = db.GetCats();
+    
+    // filter
+    const filter = url.searchParams.get("filter") || "";
+    cats = cats.filter(cat => {
+        return cat.breed.toLowerCase().includes(filter.toLowerCase())
+        || cat.description.toLowerCase().includes(filter.toLowerCase())
+        || cat.name.toLowerCase().includes(filter.toLowerCase())
+    });
 
-    const cats = db.GetCats();
+    // apply
     let catsHtml = "";
     cats.forEach(cat => {
         catsHtml += TemplateCat(cat);

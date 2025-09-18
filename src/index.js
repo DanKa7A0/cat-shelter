@@ -4,8 +4,9 @@ import * as views from "./views.js";
 const server = http.createServer(async (req, resp) => {
     if (req.method === "GET"){        
         let view = "";
-        if (req.url === "/"){
-            view = await views.HomeView();
+        if (req.url === "/" || req.url.includes("filter")){
+            const fullUrl = new URL(req.url, `http://${req.headers.host}`);
+            view = await views.HomeView(fullUrl);
         }
         else if (req.url === "/styles/site.css"){
             view = await views.Css();
