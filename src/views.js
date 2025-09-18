@@ -73,7 +73,7 @@ export async function EditCatView(cat_ID){
 
     let htmlBreeds = "";
     breeds.forEach((breed) => {
-        htmlBreeds += `<option value="${breed}">${breed}</option>`;
+        htmlBreeds += `<option value="${breed}" ${breed === cat.breed ? "selected" : ""}>${breed}</option>`;
     });
 
     html = html.replace("{{catName}}", cat.name);
