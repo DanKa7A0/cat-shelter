@@ -36,7 +36,7 @@ function TemplateCat(cat){
             <p><span>Description: </span>${cat.description}</p>
             <ul class="buttons">
                 <li class="btn edit"><a href="/cats/edit-cat/${cat.id}">Change Info</a></li>
-                <li class="btn delete"><a href="">New Home</a></li>
+                <li class="btn delete"><a href="/cats/shelter/${cat.id}">New Home</a></li>
             </ul>
         </li>
     `.trim();
@@ -69,7 +69,7 @@ export async function AddCatSubmit(data){
 export async function EditCatView(cat_ID){
     let html = await ReadFile("views/editCat.html");
     const cat = await db.GetCat(cat_ID);
-    const breeds = await db.GetBreeds();    
+    const breeds = await db.GetBreeds();
 
     let htmlBreeds = "";
     breeds.forEach((breed) => {
@@ -91,6 +91,22 @@ export async function EditCatSubmit(id, data){
 export async function AddBreedView(){
     return await ReadFile("views/addBreed.html");
 }
-export async function AddBreedSubmit(data){
+export async function AddBreedSubmit(data){    
      await db.SaveBreed(data);
+}
+
+// shelter cat
+export async function CatShelterView(cat_ID){
+    let html = await ReadFile("views/catShelter.html");
+    const cat = db.GetCat(cat_ID);
+
+    html = html.replaceAll("{{catName}}", cat.name);
+    html = html.replace("{{catDescription}}", cat.description);
+    html = html.replace("{{imgUrl}}", cat.imgUrl);
+    html = html.replaceAll("{{breed}}", cat.breed);
+
+    return html;
+}
+export async function CatShelterSubmit(cat_ID){
+    await db.DeleteCat(cat_ID);
 }

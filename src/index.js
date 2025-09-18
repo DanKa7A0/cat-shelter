@@ -21,6 +21,10 @@ const server = http.createServer(async (req, resp) => {
         else if (req.url.includes("/cats/add-breed")){
             view = await views.AddBreedView();
         }
+        else if (req.url.includes("/cats/shelter")){
+            const id = Number(req.url.split("/").pop());
+            view = await views.CatShelterView(id);
+        }
         resp.write(view);
         resp.end();
     }
@@ -45,6 +49,10 @@ const server = http.createServer(async (req, resp) => {
             }
             else if (req.url === "/cats/add-breed"){
                 await views.AddBreedSubmit(result);
+            }
+            else if (req.url.includes("/cats/shelter")){
+                const id = Number(req.url.split("/").pop());
+                await views.CatShelterSubmit(id);
             }
 
             resp.writeHead(302, {
